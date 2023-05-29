@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2 class="logo">LOGO</h2>
+        <nav class="navigation"> 
+            <a href="">Home</a>
+            <a href="">About</a>
+            <a href="">Services</a>
+            <a href="">Contact Us</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+     
+    <div class="wrapper">
+        <span class="icon-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </span>
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="inputbox"  >
+                    <input type="text" id="Username"required>
+                    <label>Username</label>
+                </div>
+                <div class="inputbox" >
+                    <input type="email"  id="email"required>
+                    <label>Email</label>
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="Password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">I accept the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn" id="signup_button"><a href="Quiz.html">Register</a></button>
+        
+             </form>
+        </div>
+    </FORM>
+
+    
+    
+
+    
+
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    import  {getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQQkwn3HW2gHxQ0hwOyLH9l_Pv9vdvov0",
+      authDomain: "quizzz-819ed.firebaseapp.com",
+      projectId: "quizzz-819ed",
+      storageBucket: "quizzz-819ed.appspot.com",
+      messagingSenderId: "60715665938",
+      appId: "1:60715665938:web:3b38a3d9986bf7eff0a6cb",
+      measurementId: "G-FNEHJC06CB"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+   
+    const auth= getAuth();
+
+    signup_button.addEventListener('click',(e)=>{
+
+      var email= document.getElementById('email').value;
+      var password= document.getElementById('Password').value;
+      var username= document.getElementById('Username').value;
+      
+      createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+
+    const user = userCredential.user;
+
+    set(ref(database,'users/' + user.uid),{
+username: Username,
+email:email
+    })
+    alert('user created');
+    
+    
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    alert('errorMessage');
+    // ..
+  });
+    })
+  </script>
+</html>
